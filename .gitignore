@@ -25,3 +25,6 @@ yarn-error.log*
 #ssh_key
 ssh_key
 ssh_key.pub
+
+#credentials for emailjs
+emailkeys.js

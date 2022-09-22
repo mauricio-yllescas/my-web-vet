@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Keys from '../components/emailkeys';
+import Keys from '../../../keys/emailkeys';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
