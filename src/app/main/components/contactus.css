@@ -1,0 +1,24 @@
+.pad-bottom {
+    padding-bottom: 2%;
+}
+
+label {
+    padding-right: 1%;
+}
+
+.align-left {
+    text-align: left;
+    margin-left: 8%;
+}
+
+.textInput {
+    width: 50%;
+}
+
+.summaryArea {
+    width: 70%;
+    height: auto;
+    vertical-align: middle;
+    font-family: inherit;
+    font-size: inherit;
+}

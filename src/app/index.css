@@ -1,0 +1,25 @@
+.row {
+    height: 100%;
+    width: 100%;
+}
+
+.bg-img {
+    background: no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-size: 100%;
+}
+
+.pad-left-20 {
+    padding-left: 20%;
+}
+
+.pad-right-20 {
+    padding-right: 20%;
+}
+
+.pad-top {
+    padding-top: 2%;
+}
