@@ -42,7 +42,7 @@ class Vets extends Component {
     }
     
     drawData = (vets) => {
-        let maxVets = vets.length;
+        //let maxVets = vets.length;
         //let divWidth = maxVets > 5 ? 20 : (100 / maxVets);
         
         let sketch = vets
@@ -58,7 +58,7 @@ class Vets extends Component {
                                     <div className="text-vets">
                                         <span>Address: <b>{x.Address}</b></span><br/>
                                         <span>Phone: <b>{x.Phone}</b></span><br/>
-                                        <span>Site: <b><a target="_blank" href={x.url} style={{cursor: 'pointer'}}>{x.url}</a></b></span><br/>
+                                        <span>Site: <b><a target='_blank' rel='noreferrer' href={x.url} style={{cursor: 'pointer'}}>{x.url}</a></b></span><br/>
                                     </div>
                                 </div>
                                 <div id={IdMap} className='div-45 float-children'>

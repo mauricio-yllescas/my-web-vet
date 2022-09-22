@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
-import './main.css';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faPeopleGroup, faBuilding, faLocation, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { Button, ButtonGroup } from 'react-bootstrap';
+
+import './main.css';
+
 import Home from './components/home';
 import AboutUs from './components/aboutus';
 import Vets from './components/vets';
@@ -45,37 +49,27 @@ class Main extends Component {
     render = () => {
         return(
             <React.Fragment>
-                <div className="row-header"> 
+                <div className="row-header container"> 
                     <h1>Find your Vet</h1>
                 </div>
                 <div className="row">
-                    <div className="container div-25"></div>
-                    <div className="container div-10">
-                        <button name="home" onClick={(e) => this.showComponent(e)}>
+                    <ButtonGroup size="sm" className="mb-2">
+                        <Button variant="outline-secondary" size="sm" name="home" onClick={(e) => this.showComponent(e)}>
                             <FontAwesomeIcon icon={faHome} /> | Home
-                        </button>
-                    </div>
-                    <div className="container div-10">
-                        <button name="aboutus" onClick={(e) => this.showComponent(e)}>
+                        </Button>
+                        <Button variant="outline-secondary" size="sm" name="aboutus" onClick={(e) => this.showComponent(e)}>
                             <FontAwesomeIcon icon={faPeopleGroup} /> | About Us
-                        </button>
-                    </div>
-                    <div className="container div-10">
-                        <button name="vets" onClick={(e) => this.showComponent(e)}>
+                        </Button>
+                        <Button variant="outline-secondary" size="sm" name="vets" onClick={(e) => this.showComponent(e)}>
                             <FontAwesomeIcon icon={faBuilding} /> | Main Vets
-                        </button>
-                    </div>
-                    <div className="container div-10">
-                        <button name="location" onClick={(e) => this.showComponent(e)}>
+                        </Button>
+                        <Button variant="outline-secondary" size="sm" name="location" onClick={(e) => this.showComponent(e)}>
                             <FontAwesomeIcon icon={faLocation} /> | Locations
-                        </button>
-                    </div>
-                    <div className="container div-10">
-                        <button name="contact" onClick={(e) => this.showComponent(e)}>
+                        </Button>
+                        <Button variant="outline-secondary" size="sm" name="contact" onClick={(e) => this.showComponent(e)}>
                             <FontAwesomeIcon icon={faPhone} /> | Contact Us
-                        </button>
-                    </div>
-                    <div className="container div-25"></div>
+                        </Button>
+                    </ButtonGroup>
                 </div>
                 <div className="row"> 
                     {this.state.showHome ? <Home></Home> : null }

@@ -25,7 +25,7 @@ class AboutUs extends Component {
                                             The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
                                 </div>
                                 <div className="div-30 float-children">
-                                        <img src={logo} className="img-resizing"/>
+                                        <img src={logo} alt={logo} className="img-resizing"/>
                                         <h3 className="h3-center">Find my Vet</h3>
                                 </div>
                         </div>

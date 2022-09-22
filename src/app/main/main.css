@@ -1,11 +1,17 @@
-.row-header {
-    height: 100%;
-    padding-bottom: 2%;
-}
-
 .row{
     width: 100%;
 }
+
+.row-header {
+    height: 100%;
+    padding: 2% 0%;
+}
+
+/* .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
 
 .row .container {
     display: inline-block;
