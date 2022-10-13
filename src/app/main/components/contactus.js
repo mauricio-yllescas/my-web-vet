@@ -17,7 +17,7 @@ class ContactUs extends Component {
         firstname: '',
         lastname: '',
         message: '',
-        showAlert: false
+        showPopUp: false
     }
 
     onInputchange = (e) => {
@@ -54,10 +54,10 @@ class ContactUs extends Component {
             message: this.state.message
         };
 
-        const showAlert = this.validateForm(formSend);
+        const PopUpVisible = this.validateForm(formSend);
         
-        if(showAlert)
-            this.setState({showAlert : showAlert});
+        if(PopUpVisible)
+            this.setState({showPopUp : PopUpVisible});
         else {
             console.log('envia mail')
             // emailjs.send(Keys.SERVICE_ID, Keys.TEMPLATE_ID, formSend, Keys.PUBLIC_KEY)
@@ -77,7 +77,7 @@ class ContactUs extends Component {
             return false;
     }
 
-    closePopUp = () => this.setState({showAlert: false});
+    togglePopUp = () => this.setState({showPopUp: !this.state.showPopUp});
 
     render = () => {
         return (
@@ -89,7 +89,7 @@ class ContactUs extends Component {
                                 <Form>
                                     <Form.Group className="mb-3 align-form" controlId="frmName">
                                         <InputGroup className="mb-3">
-                                            <InputGroup.Text>Preferred name and lastname (*)</InputGroup.Text>
+                                            <InputGroup.Text>Preferred name and last name (*)</InputGroup.Text>
                                             <Form.Control type="name" placeholder="Enter Name" name="firstname" value={this.state.firstname} onChange={this.onInputchange}/>
                                             <Form.Control type="lastname" placeholder="Enter Last name" name="lastname" value={this.state.lastname} onChange={this.onInputchange}/>
                                         </InputGroup>
@@ -110,7 +110,7 @@ class ContactUs extends Component {
                                     </Button>
                                 </Form>
                             </div>
-                            {this.state.showAlert ? <PopUpAlert></PopUpAlert> : null }
+                            {this.state.showPopUp ? <PopUpAlert closePopUp={this.togglePopUp.bind(this)}></PopUpAlert> : null }
                         </div>
                     </div>
             </React.Fragment>
