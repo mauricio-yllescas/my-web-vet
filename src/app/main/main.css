@@ -1,4 +1,5 @@
 .row{
+    --bs-gutter-x: 0rem;
     width: 100%;
 }
 
@@ -7,11 +8,11 @@
     padding: 2% 0%;
 }
 
-/* .container {
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
-} */
+}
 
 .row .container {
     display: inline-block;
@@ -21,6 +22,11 @@ h1 {
     font-size: xx-large;
     font-weight: bolder;
     color: black;
+}
+
+.pd-sides {
+    padding-left: 10%;
+    padding-right: 6%;
 }
 
 /* Anchura de divs */
@@ -58,6 +64,10 @@ h1 {
 
 .div-75 {
     width: 75%;
+}
+
+.div-90 {
+    width: 90%;
 }
 
 .contenido-main {

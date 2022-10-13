@@ -1,18 +1,23 @@
-import React, {Component} from "react";
+import React, {Component } from "react";
 import Keys from '../../../keys/emailkeys';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { Button, Form, InputGroup } from 'react-bootstrap';
+
 import emailjs from '@emailjs/browser';
 
 import './contactus.css';
+
+import PopUpAlert from './alert';
 
 class ContactUs extends Component {
     state = {
         to_email: '',
         firstname: '',
         lastname: '',
-        message: ''
+        message: '',
+        showAlert: false
     }
 
     onInputchange = (e) => {
@@ -27,7 +32,8 @@ class ContactUs extends Component {
         let newValue = value;
 
         switch(name) {
-            case 'firstname' || 'lastname':
+            case 'firstname':
+            case 'lastname':
                 if(!regex.test(lastValue))
                     newValue = value.substring(0, valLength - 1);
                 break;
@@ -43,54 +49,69 @@ class ContactUs extends Component {
         const name = this.state.firstname + ' ' + this.state.lastname;
 
         const formSend = {
-            to_email: this.state.to_email,
-            to_name: name,
+            to_email: this.state.to_email.trim(),
+            to_name: name.trim(),
             message: this.state.message
         };
 
-        //debugger;
+        const showAlert = this.validateForm(formSend);
+        
+        if(showAlert)
+            this.setState({showAlert : showAlert});
+        else {
+            console.log('envia mail')
+            // emailjs.send(Keys.SERVICE_ID, Keys.TEMPLATE_ID, formSend, Keys.PUBLIC_KEY)
+            //   .then((result) => {
+            //       console.log(result.text);
+            //   })
+            //   .catch ((error) => {
+            //       console.log(error.text);
+            //   });
+            }
+        }
 
-        emailjs.send(Keys.SERVICE_ID, Keys.TEMPLATE_ID, formSend, Keys.PUBLIC_KEY)
-          .then((result) => {
-              console.log(result.text);
-          })
-          .catch ((error) => {
-              console.log(error.text);
-          });
+    validateForm = (form) => {
+        if (form.to_name.length === 0 || form.to_email.length === 0)
+            return true;
+        else
+            return false;
     }
+
+    closePopUp = () => this.setState({showAlert: false});
 
     render = () => {
         return (
             <React.Fragment>
                     <div className="row pad-top">
-                        <div className="div-25 container"></div>
-                        <div className="div-50 container">
+                        <div className="container">
                             <h2 className="h2-center">Submit your questions</h2>
-                            <form onSubmit={this.sendMail}>
-                                <div className="row container pad-bottom align-left">
-                                        <div className="div-45 float-children">
-                                            <label>Name: </label>
-                                            <input id="txtName" className="textInput" placeholder="First Name" name="firstname" value={this.state.firstname} onChange={this.onInputchange}/>
-                                        </div>
-                                        <div className="div-45 float-children">
-                                            <label>Last Name: </label>
-                                            <input id="txtLastName" className="textInput" placeholder="Last Name" name="lastname" value={this.state.lastname} onChange={this.onInputchange}/>
-                                        </div>
-                                </div>
-                                <div className="row pad-bottom align-left">
-                                        <label>Email: </label>
-                                        <input id="txtEmail" className="textInput" placeholder="Email" name="to_email" value={this.state.to_email} onChange={this.onInputchange}/>
-                                </div>
-                                <div className="row pad-bottom align-left">
-                                    <label>Summary: </label>
-                                    <textarea id="txtComment" className="summaryArea" placeholder="Write your opinion..." name="message" value={this.state.message} onChange={this.onInputchange} rows={4}></textarea>
-                                </div>
-                                <button id="btnSend" type="submit">
-                                    <FontAwesomeIcon icon={faPaperPlane} /> Send
-                                </button>
-                            </form>
+                            <div className="pad-top">
+                                <Form>
+                                    <Form.Group className="mb-3 align-form" controlId="frmName">
+                                        <InputGroup className="mb-3">
+                                            <InputGroup.Text>Preferred name and lastname (*)</InputGroup.Text>
+                                            <Form.Control type="name" placeholder="Enter Name" name="firstname" value={this.state.firstname} onChange={this.onInputchange}/>
+                                            <Form.Control type="lastname" placeholder="Enter Last name" name="lastname" value={this.state.lastname} onChange={this.onInputchange}/>
+                                        </InputGroup>
+                                    </Form.Group>
+                                    <Form.Group className="mb-3 align-form" controlId="frmEmail">
+                                        <Form.Label>Email (*)</Form.Label>
+                                        <Form.Control type="email" placeholder="Enter Email" name="to_email" value={this.state.to_email} onChange={this.onInputchange}/>
+                                        <Form.Text className="text-muted">
+                                            Use semicolon to add several emails
+                                        </Form.Text>
+                                    </Form.Group>
+                                    <Form.Group className="mb-3 align-form" controlId="frmSummary">
+                                        <Form.Label>Summary </Form.Label>
+                                        <Form.Control type="summary" as="textarea" placeholder="Write your opinion..." name="message" value={this.state.message} onChange={this.onInputchange} rows={4}/>
+                                    </Form.Group>
+                                    <Button variant="outline-primary" name="send" onClick={(e) => this.sendMail(e)}>
+                                        <FontAwesomeIcon icon={faPaperPlane}/> Send
+                                    </Button>
+                                </Form>
+                            </div>
+                            {this.state.showAlert ? <PopUpAlert></PopUpAlert> : null }
                         </div>
-                        <div className="div-25 container"></div>
                     </div>
             </React.Fragment>
         );

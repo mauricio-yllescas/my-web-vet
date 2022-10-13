@@ -1,9 +1,17 @@
 .img-vets-resizing {
-    width: 60%;
-    height: 10%;
+    width: 50%;
+    height: 8%;
     margin-left: 25%;
 }
 
 .text-vets {
    text-align: left; 
+}
+
+.h-div {
+    height: 10%;
+}
+
+.pd-left {
+    padding-left: 10%
 }

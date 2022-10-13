@@ -53,23 +53,26 @@ class Main extends Component {
                     <h1>Find your Vet</h1>
                 </div>
                 <div className="row">
-                    <ButtonGroup size="sm" className="mb-2">
-                        <Button variant="outline-secondary" size="sm" name="home" onClick={(e) => this.showComponent(e)}>
+                    <div className='div-75'>
+                    <ButtonGroup className="mb-2">
+                        <Button variant="outline-secondary" name="home" onClick={(e) => this.showComponent(e)}>
                             <FontAwesomeIcon icon={faHome} /> | Home
                         </Button>
-                        <Button variant="outline-secondary" size="sm" name="aboutus" onClick={(e) => this.showComponent(e)}>
+                        <Button variant="outline-secondary" name="aboutus" onClick={(e) => this.showComponent(e)}>
                             <FontAwesomeIcon icon={faPeopleGroup} /> | About Us
                         </Button>
-                        <Button variant="outline-secondary" size="sm" name="vets" onClick={(e) => this.showComponent(e)}>
+                        <Button variant="outline-secondary" name="vets" onClick={(e) => this.showComponent(e)}>
                             <FontAwesomeIcon icon={faBuilding} /> | Main Vets
                         </Button>
-                        <Button variant="outline-secondary" size="sm" name="location" onClick={(e) => this.showComponent(e)}>
+                        {/* <Button variant="outline-secondary" name="location" onClick={(e) => this.showComponent(e)}>
                             <FontAwesomeIcon icon={faLocation} /> | Locations
-                        </Button>
-                        <Button variant="outline-secondary" size="sm" name="contact" onClick={(e) => this.showComponent(e)}>
+                        </Button> */}
+                        <Button variant="outline-secondary" name="contact" onClick={(e) => this.showComponent(e)}>
                             <FontAwesomeIcon icon={faPhone} /> | Contact Us
                         </Button>
                     </ButtonGroup>
+                    </div>
+                    <br></br>
                 </div>
                 <div className="row"> 
                     {this.state.showHome ? <Home></Home> : null }

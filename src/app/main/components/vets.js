@@ -50,12 +50,11 @@ class Vets extends Component {
                 let IdMap = 'vet' + x.IdVet;
 
                 return(
-                    <div key={x.IdVet} className="row pad-top">
-                        <div className="div-25 container"></div>
-                            <div className="div-50 container">
+                    <div key={x.IdVet} className="pad-top">
+                            <div className="container">
                                 <h3 className="h3-center">{x.Name}</h3>
-                                <div className='div-45 float-children'>
-                                    <div className="text-vets">
+                                <div className='float-children pad-top pd-left'>
+                                    <div className="div-90 text-vets">
                                         <span>Address: <b>{x.Address}</b></span><br/>
                                         <span>Phone: <b>{x.Phone}</b></span><br/>
                                         <span>Site: <b><a target='_blank' rel='noreferrer' href={x.url} style={{cursor: 'pointer'}}>{x.url}</a></b></span><br/>
@@ -65,7 +64,6 @@ class Vets extends Component {
                                         <img className='img-vets-resizing' src={images.alias.find(img => img.nombre === x.Alias).logo} alt={x.Name} />
                                 </div>
                             </div>
-                        <div className="div-25 container"></div>
                     </div>
                 )
             });
