@@ -17,7 +17,8 @@ class ContactUs extends Component {
         firstname: '',
         lastname: '',
         message: '',
-        showPopUp: false
+        showPopUpError: false,
+        showPopUpOk: false
     }
 
     onInputchange = (e) => {
@@ -44,7 +45,7 @@ class ContactUs extends Component {
         return {name, newValue};
     };
 
-    sendMail = (e) => {
+    getFormData = (e) => {
         e.preventDefault();
         const name = this.state.firstname + ' ' + this.state.lastname;
 
@@ -56,19 +57,8 @@ class ContactUs extends Component {
 
         const PopUpVisible = this.validateForm(formSend);
         
-        if(PopUpVisible)
-            this.setState({showPopUp : PopUpVisible});
-        else {
-            console.log('envia mail')
-            // emailjs.send(Keys.SERVICE_ID, Keys.TEMPLATE_ID, formSend, Keys.PUBLIC_KEY)
-            //   .then((result) => {
-            //       console.log(result.text);
-            //   })
-            //   .catch ((error) => {
-            //       console.log(error.text);
-            //   });
-            }
-        }
+        PopUpVisible ? this.setState({showPopUpError : PopUpVisible}) : this.sendMail(formSend);
+    }
 
     validateForm = (form) => {
         if (form.to_name.length === 0 || form.to_email.length === 0)
@@ -77,7 +67,27 @@ class ContactUs extends Component {
             return false;
     }
 
-    togglePopUp = () => this.setState({showPopUp: !this.state.showPopUp});
+    sendMail = (form) => {
+        emailjs.send(Keys.SERVICE_ID, Keys.TEMPLATE_ID, form, Keys.PUBLIC_KEY)
+            .then((result) => {
+                this.setState({showPopUpOk: true});
+                this.setState(this.clearForm());
+            })
+            .catch ((error) => {
+                console.log(error.text);
+            });
+    }
+
+    togglePopUp = (popup) => popup === "error" ? this.setState({showPopUpError: !this.state.showPopUpError}) : this.setState({showPopUpOk: !this.state.showPopUpOk});
+
+    clearForm = () => {
+        return {
+            to_email: '',
+            firstname: '',
+            lastname: '',
+            message: ''
+        }
+    }
 
     render = () => {
         return (
@@ -105,12 +115,33 @@ class ContactUs extends Component {
                                         <Form.Label>Summary </Form.Label>
                                         <Form.Control type="summary" as="textarea" placeholder="Write your opinion..." name="message" value={this.state.message} onChange={this.onInputchange} rows={4}/>
                                     </Form.Group>
-                                    <Button variant="outline-primary" name="send" onClick={(e) => this.sendMail(e)}>
+                                    <Button variant="outline-primary" name="send" onClick={(e) => this.getFormData(e)}>
                                         <FontAwesomeIcon icon={faPaperPlane}/> Send
                                     </Button>
                                 </Form>
                             </div>
-                            {this.state.showPopUp ? <PopUpAlert closePopUp={this.togglePopUp.bind(this)}></PopUpAlert> : null }
+                            {this.state.showPopUpError ? 
+                                <div className="popup-alert">
+                                    <PopUpAlert 
+                                        closePopUp={() => this.togglePopUp("error")}
+                                        type="danger"
+                                        header="Oh snap! You got an error!"
+                                        detail="You must fill all the inputs marked with an asterisk."
+                                    >
+                                    </PopUpAlert>
+                                </div> : null
+                            }
+                            {this.state.showPopUpOk ? 
+                                <div className="popup-alert">
+                                    <PopUpAlert 
+                                        closePopUp={() => this.togglePopUp("ok")}
+                                        type="success"
+                                        header="Mail successfully sent!"
+                                        detail="Your opinion has been received successfully."
+                                    >
+                                    </PopUpAlert>
+                                </div> : null 
+                            }
                         </div>
                     </div>
             </React.Fragment>

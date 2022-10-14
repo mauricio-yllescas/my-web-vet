@@ -10,10 +10,10 @@ class PopUpAlert extends Component{
     render = () => {
         return (
             <React.Fragment>
-                <Alert variant="danger" onClose={this.props.closePopUp} dismissible>
-                    <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-                    <p>
-                        You must fill all the inputs marked with an asterisk.
+                <Alert variant={this.props.type} onClose={this.props.closePopUp} dismissible>
+                    <Alert.Heading>{this.props.header}</Alert.Heading>
+                    <p> 
+                        {this.props.detail}
                     </p>
                 </Alert>
             </React.Fragment>
