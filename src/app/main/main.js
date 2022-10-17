@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faPeopleGroup, faBuilding, faLocation, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faPeopleGroup, faBuilding, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { Button, ButtonGroup } from 'react-bootstrap';
 
 import './main.css';

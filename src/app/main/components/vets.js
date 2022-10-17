@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import { Carousel } from 'react-bootstrap';
+
 import images from '../images';
 import './vets.css';
 
@@ -27,15 +29,15 @@ class Vets extends Component {
                 'Phone': '(51) 960-390-986',
                 'url': 'https://diagnopet.com.pe/',
                 'Alias': 'diagnopet'
-            },
-            {
-                'IdVet': 3,
-                'Name': 'Dra. Vane',
-                'Address': 'Calle Juan Pezet 230, Santiago de Surco',
-                'Phone': '(01) 748-3737',
-                'url': 'https://doctoravanevet.com/',
-                'Alias': 'dravane'
             }
+            // {
+            //     'IdVet': 3,
+            //     'Name': 'Hurón Azul',
+            //     'Address': 'Av. Colonial 2505',
+            //     'Phone': '(+51) 934-916-875',
+            //     'url': 'https://elhuronazul.net/',
+            //     'Alias': 'huronazul'
+            // }
         ];
 
         this.setState({lstVets: vetsAvailable});
@@ -50,21 +52,18 @@ class Vets extends Component {
                 let IdMap = 'vet' + x.IdVet;
 
                 return(
-                    <div key={x.IdVet} className="pad-top">
-                            <div className="container">
-                                <h3 className="h3-center">{x.Name}</h3>
-                                <div className='float-children pad-top pd-left'>
-                                    <div className="div-90 text-vets">
-                                        <span>Address: <b>{x.Address}</b></span><br/>
-                                        <span>Phone: <b>{x.Phone}</b></span><br/>
-                                        <span>Site: <b><a target='_blank' rel='noreferrer' href={x.url} style={{cursor: 'pointer'}}>{x.url}</a></b></span><br/>
-                                    </div>
-                                </div>
-                                <div id={IdMap} className='div-45 float-children'>
-                                        <img className='img-vets-resizing' src={images.alias.find(img => img.nombre === x.Alias).logo} alt={x.Name} />
-                                </div>
-                            </div>
-                    </div>
+                    <Carousel.Item key={IdMap}>
+                        <img
+                            className="img-vets-resizing"
+                            src={images.alias.find(img => img.nombre === x.Alias).logo}
+                            alt={x.Name}
+                        />
+                        <Carousel.Caption>
+                            <span>Address: <b>{x.Address}</b></span><br/>
+                            <span>Phone: <b>{x.Phone}</b></span><br/>
+                            <span>Site: <b><a target='_blank' rel='noreferrer' href={x.url} style={{cursor: 'pointer'}}>{x.url}</a></b></span><br/>
+                        </Carousel.Caption>
+                    </Carousel.Item>
                 )
             });
 
@@ -76,7 +75,16 @@ class Vets extends Component {
         
         return (
             <React.Fragment>
-                {sketch}
+                <div className="row pad-top">
+                    <div className="container">
+                        <h2 className="h2-center">Associated vets</h2>
+                            <div className="pad-top">
+                            <Carousel variant="dark">
+                                {sketch}
+                            </Carousel>
+                        </div>
+                    </div>
+                </div>
             </React.Fragment>
         );
     };
